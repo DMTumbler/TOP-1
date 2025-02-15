@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>This is a title</title>
+    <link rel="stylesheet" href="myStyle.css">
 </head>
 <body>
-<p>This is the text in the body of this page</p>
-<img src="images/daisy-crop.PNG" alt="daisy-crop" width="382" height="896">
+<header>
+    <h1 id="header">Header Text</h1>
+</header>
+<nav>
+    <ul class="myUl">
+        <li><a href="recipes/lasagna.html">Lasagna</a></li>
+        <li><a href="recipes/brownies.html">Lasagna</a></li>
+        <li><a href="recipes/rice.html">Lasagna</a></li>
+    </ul>
+</nav>
+<label for="counter">Input Counter</label>
+<input type="number" value="0" name="counter" id="counter">
+<br>
+<br>
+<label for="userInput">User Input </label><input type="text" name="userInput" id="userInput">
+<button onclick="decimalToBinary()">Calculate</button>
+<label for="result">Result </label><input type="text" name="result" id="result" readonly>
+<main>
+</main>
+<script>
+    // for browser
+    function decimalToBinary() {
+        let binaryString = '';
+        let residual = '';
+        let userValue = parseInt(document.getElementById('userInput').value);
+        console.log('The user value as an int is:', userValue)
+
+        while (userValue > 0) {
+            residual = userValue % 2;
+            userValue = Math.floor(userValue / 2);
+            binaryString = binaryString + residual;
+            console.log("Residual:", residual)
+            console.log("User Value:", userValue)
+            console.log("Building your string:", binaryString)
+        }
+
+        console.log('The current string is:', binaryString);
+
+        let finalString = binaryString.split('').reverse().join('');
+
+        console.log('Your final string is:', finalString);
+
+        document.getElementById('result').value = finalString;
+    }
+    function binaryToDecimal(binaryString) {
+        console.log('The current binary string is:', binaryString);
+
+        let decimalValue = 0;
+
+        // Loop through the binary string from right to left
+        for (let i = 0; i < binaryString.length; i++) {
+            // Get the value of the current bit
+            let bit = binaryString[binaryString.length - 1 - i]; // Start from the least significant bit
+
+            // If the bit is '1', add the corresponding power of 2 to the decimal value
+            if (bit === '1') {
+                decimalValue += Math.pow(2, i);
+            }
+        }
+
+        console.log('The decimal value is:', decimalValue);
+        return decimalValue;
+    }
+
+    // Example usage
+    console.log(binaryToDecimal('1011')); // Output: 11
+
+    window.addEventListener('keypress', function () {
+        document.getElementById('counter').value = parseInt(document.getElementById('counter').value) + 1;
+    })
+
+    window.addEventListener('click', function () {
+        document.getElementById('counter').value = parseInt(document.getElementById('counter').value) + 1;
+    })
+
+</script>
 </body>
 </html>
